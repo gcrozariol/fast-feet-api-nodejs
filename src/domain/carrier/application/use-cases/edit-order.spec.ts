@@ -3,20 +3,22 @@ import { Status } from '@/domain/carrier/enterprise/entities/order'
 import { makeOrder } from '@test/factories/make-order'
 import { InMemoryOrdersRepository } from 'test/repositories/in-memory/in-memory-orders-repository'
 
-test('update order status', async () => {
-  const inMemoryOrdersRepository = new InMemoryOrdersRepository()
-  const sut = new EditOrderUseCase(inMemoryOrdersRepository)
+describe('Edit Order [USE CASE]', () => {
+  it('should be able to update an order status', async () => {
+    const inMemoryOrdersRepository = new InMemoryOrdersRepository()
+    const sut = new EditOrderUseCase(inMemoryOrdersRepository)
 
-  const order = makeOrder()
+    const order = makeOrder()
 
-  await inMemoryOrdersRepository.create(order)
+    await inMemoryOrdersRepository.create(order)
 
-  const { order: updatedOrder } = await sut.execute({
-    orderId: order.id.toString(),
-    props: {
-      status: Status.DELIVERED,
-    },
+    const { order: updatedOrder } = await sut.execute({
+      orderId: order.id.toString(),
+      props: {
+        status: Status.DELIVERED,
+      },
+    })
+
+    expect(updatedOrder.status).toEqual(Status.DELIVERED)
   })
-
-  expect(updatedOrder.status).toEqual(Status.DELIVERED)
 })
