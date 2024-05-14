@@ -1,11 +1,11 @@
-import { UpdateOrderDeliveryStatusUseCase } from './update-order-delivery-status'
+import { EditOrderUseCase } from './edit-order'
 import { Status } from '@/domain/carrier/enterprise/entities/order'
-import { InMemoryOrdersRepository } from '../repositories/in-memory/in-memory-orders-repository'
-import { makeOrder } from 'test/factories/make-order'
+import { makeOrder } from '@test/factories/make-order'
+import { InMemoryOrdersRepository } from 'test/repositories/in-memory/in-memory-orders-repository'
 
 test('update order status', async () => {
   const inMemoryOrdersRepository = new InMemoryOrdersRepository()
-  const sut = new UpdateOrderDeliveryStatusUseCase(inMemoryOrdersRepository)
+  const sut = new EditOrderUseCase(inMemoryOrdersRepository)
 
   const order = makeOrder()
 
@@ -13,7 +13,9 @@ test('update order status', async () => {
 
   const { order: updatedOrder } = await sut.execute({
     orderId: order.id.toString(),
-    status: Status.DELIVERED,
+    props: {
+      status: Status.DELIVERED,
+    },
   })
 
   expect(updatedOrder.status).toEqual(Status.DELIVERED)

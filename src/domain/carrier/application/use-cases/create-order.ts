@@ -1,6 +1,6 @@
 import { Order } from '@/domain/carrier/enterprise/entities/order'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { InMemoryOrdersRepository } from '../repositories/in-memory/in-memory-orders-repository'
+import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 
 interface CreateOrderUseCaseRequest {
   recipientId: string

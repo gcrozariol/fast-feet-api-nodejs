@@ -1,5 +1,5 @@
 import { makeOrder } from 'test/factories/make-order'
-import { InMemoryOrdersRepository } from '../repositories/in-memory/in-memory-orders-repository'
+import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 import { FetchOrdersByAddressUseCase } from './fetch-orders-by-address'
 
 let ordersRepository: InMemoryOrdersRepository
@@ -11,7 +11,7 @@ describe('Fetch Orders by Address [USE CASE]', () => {
     sut = new FetchOrdersByAddressUseCase(ordersRepository)
   })
 
-  it('should be able to fetch orders by address', async () => {
+  it('should be able to fetch orders with exact address', async () => {
     const order = makeOrder({
       address: 'address',
     })

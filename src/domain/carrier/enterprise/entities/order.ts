@@ -46,6 +46,10 @@ export class Order extends Entity<OrderProps> {
     return this.props.description
   }
 
+  set description(description: string) {
+    this.props.description = description
+  }
+
   get address() {
     return this.props.address
   }

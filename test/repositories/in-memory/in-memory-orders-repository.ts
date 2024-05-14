@@ -1,5 +1,5 @@
 import { OrdersRepository } from '@/domain/carrier/application/repositories/orders-repository'
-import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
+import { Order } from '@/domain/carrier/enterprise/entities/order'
 
 export class InMemoryOrdersRepository implements OrdersRepository {
   public items: Order[] = []
@@ -12,14 +12,15 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     return this.items.find((item) => item.id.toString() === orderId) ?? null
   }
 
-  async updateStatus(order: Order, status: Status): Promise<Order> {
-    order.status = status
-    return order
-  }
-
   async fetchOrdersByAddress(address: string): Promise<Order[]> {
-    const orders = this.items.filter((item) => item.address === address)
+    const orders = this.items.filter((item) => item.address.includes(address))
 
     return orders
+  }
+
+  async save(order: Order): Promise<void> {
+    const orderIndex = this.items.findIndex((item) => item.id === order.id)
+
+    this.items[orderIndex] = order
   }
 }
