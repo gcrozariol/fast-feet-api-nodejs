@@ -16,4 +16,10 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     order.status = status
     return order
   }
+
+  async fetchOrdersByAddress(address: string): Promise<Order[]> {
+    const orders = this.items.filter((item) => item.address === address)
+
+    return orders
+  }
 }
