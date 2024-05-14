@@ -1,6 +1,6 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { UpdateOrderDeliveryStatusUseCase } from './update-order-delivery-status'
-import { Order, Status } from '@/domain/entities/order'
+import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
 
 test('update order status', async () => {
   const sut = new UpdateOrderDeliveryStatusUseCase()

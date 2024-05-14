@@ -1,4 +1,4 @@
-import { Order, Status } from '@/domain/entities/order'
+import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
 
 interface UpdateOrderDeliveryStatusRequestUseCase {
   order: Order

@@ -1,6 +1,5 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { Order } from '@/domain/entities/order'
-import { OrdersRepository } from '@/domain/repositories/orders-repository'
+import { Order } from '@/domain/carrier/enterprise/entities/order'
+import { OrdersRepository } from '@/domain/carrier/application/repositories/orders-repository'
 import { CreateOrderUseCase } from './create-order'
 
 const fakeOrdersRepository: OrdersRepository = {
