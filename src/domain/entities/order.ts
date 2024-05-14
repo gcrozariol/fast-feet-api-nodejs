@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
@@ -54,6 +56,7 @@ export class Order extends Entity<OrderProps> {
 
   set status(status: Status) {
     this.props.status = status
+    this.touch()
   }
 
   get createdAt() {
@@ -70,5 +73,13 @@ export class Order extends Entity<OrderProps> {
 
   get returnedAt() {
     return this.props.returnedAt
+  }
+
+  get isNew(): boolean {
+    return dayjs().diff(this.createdAt, 'days') <= 3
+  }
+
+  private touch() {
+    this.props.createdAt = new Date()
   }
 }
