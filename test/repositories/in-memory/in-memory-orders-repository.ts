@@ -9,7 +9,13 @@ export class InMemoryOrdersRepository implements OrdersRepository {
   }
 
   async findById(orderId: string): Promise<Order | null> {
-    return this.items.find((item) => item.id.toString() === orderId) ?? null
+    const order = this.items.find((item) => item.id.toString() === orderId)
+
+    if (!order) {
+      return null
+    }
+
+    return order
   }
 
   async fetchOrdersByAddress(address: string): Promise<Order[]> {
@@ -22,5 +28,11 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     const orderIndex = this.items.findIndex((item) => item.id === order.id)
 
     this.items[orderIndex] = order
+  }
+
+  async delete(order: Order): Promise<void> {
+    const orderIndex = this.items.findIndex((item) => item.id === order.id)
+
+    this.items.splice(orderIndex, 1)
   }
 }

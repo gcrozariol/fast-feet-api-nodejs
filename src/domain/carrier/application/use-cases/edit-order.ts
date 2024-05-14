@@ -26,8 +26,6 @@ export class EditOrderUseCase {
 
     Object.assign(order, props)
 
-    console.log(order)
-
     await this.orderRepository.save(order)
 
     return { order }
