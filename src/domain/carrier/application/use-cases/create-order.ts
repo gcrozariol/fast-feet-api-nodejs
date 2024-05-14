@@ -1,6 +1,6 @@
 import { Order } from '@/domain/carrier/enterprise/entities/order'
-import { OrdersRepository } from '@/domain/carrier/application/repositories/orders-repository'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { InMemoryOrdersRepository } from '../repositories/in-memory/in-memory-orders-repository'
 
 interface CreateOrderUseCaseRequest {
   recipientId: string
@@ -8,14 +8,18 @@ interface CreateOrderUseCaseRequest {
   address: string
 }
 
+interface CreateOrderUseCaseResponse {
+  order: Order
+}
+
 export class CreateOrderUseCase {
-  constructor(private readonly ordersRepository: OrdersRepository) {}
+  constructor(private readonly ordersRepository: InMemoryOrdersRepository) {}
 
   async execute({
     recipientId,
     description,
     address,
-  }: CreateOrderUseCaseRequest) {
+  }: CreateOrderUseCaseRequest): Promise<CreateOrderUseCaseResponse> {
     const order = Order.create({
       recipientId: new UniqueEntityID(recipientId),
       description,
@@ -24,6 +28,6 @@ export class CreateOrderUseCase {
 
     await this.ordersRepository.create(order)
 
-    return order
+    return { order }
   }
 }

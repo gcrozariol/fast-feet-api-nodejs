@@ -1,14 +1,30 @@
 import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
+import { InMemoryOrdersRepository } from '../repositories/in-memory/in-memory-orders-repository'
 
-interface UpdateOrderDeliveryStatusRequestUseCase {
-  order: Order
+interface UpdateOrderDeliveryStatusUseCaseRequest {
+  orderId: string
   status: Status
 }
 
-export class UpdateOrderDeliveryStatusUseCase {
-  execute({ order, status }: UpdateOrderDeliveryStatusRequestUseCase) {
-    order.status = status
+interface UpdateOrderDeliveryStatusUseCaseResponse {
+  order: Order
+}
 
-    return order
+export class UpdateOrderDeliveryStatusUseCase {
+  constructor(private orderRepository: InMemoryOrdersRepository) {}
+
+  async execute({
+    orderId,
+    status,
+  }: UpdateOrderDeliveryStatusUseCaseRequest): Promise<UpdateOrderDeliveryStatusUseCaseResponse> {
+    const order = await this.orderRepository.findById(orderId)
+
+    if (!order) {
+      throw new Error('Order not found')
+    }
+
+    const updatedOrder = await this.orderRepository.updateStatus(order, status)
+
+    return { order: updatedOrder }
   }
 }

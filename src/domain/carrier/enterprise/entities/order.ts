@@ -10,7 +10,7 @@ export enum Status {
   'RETURNED' = 'RETURNED',
 }
 
-interface OrderProps {
+export interface OrderProps {
   recipientId: UniqueEntityID
   description: string
   address: string
