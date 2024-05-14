@@ -1,21 +1,22 @@
-import { Order } from '@/domain/carrier/enterprise/entities/order'
-import { OrdersRepository } from '@/domain/carrier/application/repositories/orders-repository'
 import { CreateOrderUseCase } from './create-order'
+import { InMemoryOrdersRepository } from '../repositories/in-memory/in-memory-orders-repository'
 
-const fakeOrdersRepository: OrdersRepository = {
-  create: async (order: Order) => {},
-}
+describe('Create Order [USE CASE]', () => {
+  it('should be able to create an order', async () => {
+    const ordersRepository = new InMemoryOrdersRepository()
+    const sut = new CreateOrderUseCase(ordersRepository)
 
-test('create an order', async () => {
-  const sut = new CreateOrderUseCase(fakeOrdersRepository)
+    const { order } = await sut.execute({
+      recipientId: '1',
+      description: 'description',
+      address: 'address',
+    })
 
-  const { recipientId, description, address } = await sut.execute({
-    recipientId: '1',
-    description: 'description',
-    address: 'address',
+    const { recipientId, description, address, isNew } = order
+
+    expect(recipientId.toString()).toEqual('1')
+    expect(description).toEqual('description')
+    expect(address).toEqual('address')
+    expect(isNew).toEqual(true)
   })
-
-  expect(recipientId.toString()).toEqual('1')
-  expect(description).toEqual('description')
-  expect(address).toEqual('address')
 })

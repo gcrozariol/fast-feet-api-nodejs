@@ -1,20 +1,20 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { UpdateOrderDeliveryStatusUseCase } from './update-order-delivery-status'
-import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
+import { Status } from '@/domain/carrier/enterprise/entities/order'
+import { InMemoryOrdersRepository } from '../repositories/in-memory/in-memory-orders-repository'
+import { makeOrder } from 'test/factories/make-order'
 
 test('update order status', async () => {
-  const sut = new UpdateOrderDeliveryStatusUseCase()
+  const inMemoryOrdersRepository = new InMemoryOrdersRepository()
+  const sut = new UpdateOrderDeliveryStatusUseCase(inMemoryOrdersRepository)
 
-  const order = Order.create({
-    recipientId: new UniqueEntityID(),
-    description: 'description',
-    address: 'address',
-  })
+  const order = makeOrder()
 
-  const updateOrderToDelivered = sut.execute({
-    order,
+  await inMemoryOrdersRepository.create(order)
+
+  const { order: updatedOrder } = await sut.execute({
+    orderId: order.id.toString(),
     status: Status.DELIVERED,
   })
 
-  expect(updateOrderToDelivered.status).toEqual(Status.DELIVERED)
+  expect(updatedOrder.status).toEqual(Status.DELIVERED)
 })
