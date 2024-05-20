@@ -28,9 +28,9 @@ export class InMemoryRecipientsRepository implements RecipientsRepository {
     this.items[recipientIndex] = recipient
   }
 
-  async delete(recipient: Recipient): Promise<void> {
+  async delete(recipientId: string): Promise<void> {
     const recipientIndex = this.items.findIndex(
-      (item) => item.id === recipient.id,
+      (item) => item.id.toString() === recipientId,
     )
 
     this.items.splice(recipientIndex, 1)

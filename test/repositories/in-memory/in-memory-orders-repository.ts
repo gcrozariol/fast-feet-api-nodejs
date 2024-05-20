@@ -51,8 +51,10 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     this.items[orderIndex] = order
   }
 
-  async delete(order: Order): Promise<void> {
-    const orderIndex = this.items.findIndex((item) => item.id === order.id)
+  async delete(orderId: string): Promise<void> {
+    const orderIndex = this.items.findIndex(
+      (item) => item.id.toString() === orderId,
+    )
 
     this.items.splice(orderIndex, 1)
   }

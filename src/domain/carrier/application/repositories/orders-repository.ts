@@ -17,5 +17,5 @@ export interface OrdersRepository {
     params: PaginationParams,
   ): Promise<Order[]>
   save(order: Order): Promise<void>
-  delete(order: Order): Promise<void>
+  delete(orderId: string): Promise<void>
 }
