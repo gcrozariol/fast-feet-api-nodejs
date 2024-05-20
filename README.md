@@ -10,7 +10,7 @@ An API developed using Node.js for controlling orders from a fictitious carrier:
 - [ ] It must be possible to log in with CPF and Password
 - [x] It must be possible to perform CRUD for couriers
 - [x] It must be possible to perform CRUD for orders
-- [ ] It must be possible to perform CRUD for recipients
+- [x] It must be possible to perform CRUD for recipients
 - [ ] It must be possible to pick up an order
 - [x] It must be possible to mark an order as waiting (available for pickup)
 - [x] It must be possible to mark an order as delivered
