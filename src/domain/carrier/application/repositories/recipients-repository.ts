@@ -1,8 +1,10 @@
+import { PaginationParams } from '@/core/repositories/pagination-params'
 import { Recipient } from '@/domain/carrier/enterprise/entities/recipient'
 
 export interface RecipientsRepository {
   create(recipient: Recipient): Promise<void>
   findById(recipientId: string): Promise<Recipient | null>
+  findMany(params: PaginationParams): Promise<Recipient[]>
   save(recipient: Recipient): Promise<void>
   delete(recipientId: string): Promise<void>
 }

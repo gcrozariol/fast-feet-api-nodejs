@@ -23,4 +23,10 @@ describe('Fetch Couriers [USE CASE]', () => {
     const { couriers: couriersSecondPage } = await sut.execute({ page: 2 })
     expect(couriersSecondPage).toHaveLength(5)
   })
+
+  it('should return an empty list of couriers', async () => {
+    const { couriers } = await sut.execute({ page: 1 })
+
+    expect(couriers).toHaveLength(0)
+  })
 })
