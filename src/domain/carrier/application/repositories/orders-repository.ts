@@ -1,3 +1,4 @@
+import { PaginationParams } from '@/core/repositories/pagination-params'
 import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
 
 export interface EditOrderProps {
@@ -7,7 +8,10 @@ export interface EditOrderProps {
 export interface OrdersRepository {
   create(order: Order): Promise<void>
   findById(orderId: string): Promise<Order | null>
-  fetchOrdersByAddress(address: string): Promise<Order[]>
+  fetchOrdersByAddress(
+    address: string,
+    params: PaginationParams,
+  ): Promise<Order[]>
   save(order: Order): Promise<void>
   delete(order: Order): Promise<void>
 }

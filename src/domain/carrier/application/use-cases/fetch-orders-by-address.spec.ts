@@ -18,14 +18,17 @@ describe('Fetch Orders by Address [USE CASE]', () => {
 
     ordersRepository.create(order)
 
-    const { orders } = await sut.execute({ address: 'address' })
+    const { orders } = await sut.execute({ address: 'address', page: 1 })
 
     expect(orders).toHaveLength(1)
     expect(orders[0].address).toEqual('address')
   })
 
   it('should fetch an empty list if orders cannot be found with provided address', async () => {
-    const { orders } = await sut.execute({ address: 'inexistent_address' })
+    const { orders } = await sut.execute({
+      address: 'inexistent_address',
+      page: 1,
+    })
 
     expect(orders).toHaveLength(0)
   })

@@ -3,6 +3,7 @@ import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory
 
 interface FetchOrdersByAddressUseCaseRequest {
   address: string
+  page: number
 }
 
 interface FetchOrdersByAddressUseCaseResponse {
@@ -14,8 +15,11 @@ export class FetchOrdersByAddressUseCase {
 
   async execute({
     address,
+    page,
   }: FetchOrdersByAddressUseCaseRequest): Promise<FetchOrdersByAddressUseCaseResponse> {
-    const orders = await this.ordersRepository.fetchOrdersByAddress(address)
+    const orders = await this.ordersRepository.fetchOrdersByAddress(address, {
+      page,
+    })
 
     return { orders }
   }

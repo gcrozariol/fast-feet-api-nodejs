@@ -3,7 +3,7 @@ import { makeOrder } from '@test/factories/make-order'
 import { InMemoryOrdersRepository } from 'test/repositories/in-memory/in-memory-orders-repository'
 
 describe('Delete Order [USE CASE]', () => {
-  it('should be able to delete an order status', async () => {
+  it('should be able to delete an order', async () => {
     const inMemoryOrdersRepository = new InMemoryOrdersRepository()
     const sut = new DeleteOrderUseCase(inMemoryOrdersRepository)
 
