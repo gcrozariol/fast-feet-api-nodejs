@@ -1,5 +1,5 @@
 import { Order } from '@/domain/carrier/enterprise/entities/order'
-import { InMemoryOrdersRepository } from '../repositories/in-memory/in-memory-orders-repository'
+import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 
 interface FetchOrdersByAddressUseCaseRequest {
   address: string
