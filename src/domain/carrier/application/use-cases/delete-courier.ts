@@ -1,4 +1,4 @@
-import { CourierRepository } from '../repositories/courier-repository'
+import { CouriersRepository } from '../repositories/couriers-repository'
 
 interface DeleteCourierUseCaseRequest {
   courierId: string
@@ -7,18 +7,18 @@ interface DeleteCourierUseCaseRequest {
 interface DeleteCourierUseCaseResponse {}
 
 export class DeleteCourierUseCase {
-  constructor(private courierRepository: CourierRepository) {}
+  constructor(private couriersRepository: CouriersRepository) {}
 
   async execute({
     courierId,
   }: DeleteCourierUseCaseRequest): Promise<DeleteCourierUseCaseResponse> {
-    const courier = await this.courierRepository.findById(courierId)
+    const courier = await this.couriersRepository.findById(courierId)
 
     if (!courier) {
       throw new Error('Courier not found')
     }
 
-    this.courierRepository.delete(courierId)
+    this.couriersRepository.delete(courierId)
 
     return {}
   }

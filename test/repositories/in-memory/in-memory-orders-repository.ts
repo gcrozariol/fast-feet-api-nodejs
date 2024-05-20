@@ -1,3 +1,4 @@
+import { PaginationParams } from '@/core/repositories/pagination-params'
 import { OrdersRepository } from '@/domain/carrier/application/repositories/orders-repository'
 import { Order } from '@/domain/carrier/enterprise/entities/order'
 
@@ -18,8 +19,15 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     return order
   }
 
-  async fetchOrdersByAddress(address: string): Promise<Order[]> {
-    const orders = this.items.filter((item) => item.address.includes(address))
+  async fetchOrdersByAddress(
+    address: string,
+    params: PaginationParams,
+  ): Promise<Order[]> {
+    const { page } = params
+
+    const orders = this.items
+      .filter((item) => item.address.includes(address))
+      .slice((page - 1) * 10, page * 10)
 
     return orders
   }

@@ -1,7 +1,8 @@
-import { CourierRepository } from '@/domain/carrier/application/repositories/courier-repository'
+import { PaginationParams } from '@/core/repositories/pagination-params'
+import { CouriersRepository } from '@/domain/carrier/application/repositories/couriers-repository'
 import { Courier } from '@/domain/carrier/enterprise/entities/courier'
 
-export class InMemoryCouriersRepository implements CourierRepository {
+export class InMemoryCouriersRepository implements CouriersRepository {
   public items: Courier[] = []
 
   async create(courier: Courier): Promise<void> {
@@ -16,6 +17,12 @@ export class InMemoryCouriersRepository implements CourierRepository {
     }
 
     return courier
+  }
+
+  async findMany(params: PaginationParams): Promise<Courier[]> {
+    const { page } = params
+
+    return this.items.slice((page - 1) * 10, page * 10)
   }
 
   async delete(id: string): Promise<void> {
