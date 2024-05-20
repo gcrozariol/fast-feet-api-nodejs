@@ -16,6 +16,10 @@ export interface OrdersRepository {
     recipientId: string,
     params: PaginationParams,
   ): Promise<Order[]>
+  fetchOrdersByStatus(
+    status: Status,
+    params: PaginationParams,
+  ): Promise<Order[]>
   save(order: Order): Promise<void>
   delete(orderId: string): Promise<void>
 }
