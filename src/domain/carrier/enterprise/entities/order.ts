@@ -6,8 +6,10 @@ import { Optional } from '@/core/types/optional'
 
 export enum Status {
   'READY_FOR_PICKUP' = 'READY_FOR_PICKUP',
+  'EN_ROUTE' = 'EN_ROUTE',
   'DELIVERED' = 'DELIVERED',
   'RETURNED' = 'RETURNED',
+  'CANCELED' = 'CANCELED',
 }
 
 export interface OrderProps {
@@ -15,10 +17,12 @@ export interface OrderProps {
   description: string
   address: string
   status: Status
+  createdAt: Date
+  updatedAt?: Date
   pickedUpAt?: Date
   deliveredAt?: Date
   returnedAt?: Date
-  createdAt: Date
+  canceledAt?: Date
 }
 
 export class Order extends Entity<OrderProps> {
@@ -59,6 +63,23 @@ export class Order extends Entity<OrderProps> {
   }
 
   set status(status: Status) {
+    switch (status) {
+      case Status.EN_ROUTE:
+        this.props.pickedUpAt = new Date()
+        break
+      case Status.DELIVERED:
+        this.props.deliveredAt = new Date()
+        break
+      case Status.RETURNED:
+        this.props.returnedAt = new Date()
+        break
+      case Status.CANCELED:
+        this.props.canceledAt = new Date()
+        break
+      default:
+        break
+    }
+
     this.props.status = status
     this.touch()
   }
@@ -84,6 +105,6 @@ export class Order extends Entity<OrderProps> {
   }
 
   private touch() {
-    this.props.createdAt = new Date()
+    this.props.updatedAt = new Date()
   }
 }
