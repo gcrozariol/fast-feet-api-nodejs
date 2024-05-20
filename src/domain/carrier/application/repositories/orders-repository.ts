@@ -12,6 +12,10 @@ export interface OrdersRepository {
     address: string,
     params: PaginationParams,
   ): Promise<Order[]>
+  fetchOrdersByRecipient(
+    recipientId: string,
+    params: PaginationParams,
+  ): Promise<Order[]>
   save(order: Order): Promise<void>
   delete(order: Order): Promise<void>
 }

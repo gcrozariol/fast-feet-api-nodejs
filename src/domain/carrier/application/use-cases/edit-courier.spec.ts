@@ -3,7 +3,7 @@ import { makeCourier } from '@test/factories/make-courier'
 import { InMemoryCouriersRepository } from 'test/repositories/in-memory/in-memory-couriers-repository'
 
 describe('Edit Courier [USE CASE]', () => {
-  it('should be able to update an courier name', async () => {
+  it('should be able to update a courier name', async () => {
     const inMemoryCouriersRepository = new InMemoryCouriersRepository()
     const sut = new EditCourierUseCase(inMemoryCouriersRepository)
 
