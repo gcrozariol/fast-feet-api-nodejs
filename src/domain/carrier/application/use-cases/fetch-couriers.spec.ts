@@ -11,7 +11,7 @@ describe('Fetch Couriers [USE CASE]', () => {
     sut = new FetchCouriersUseCase(couriersRepository)
   })
 
-  it('should be able to fetch couriers', async () => {
+  it('should be able to fetch couriers using pagination', async () => {
     for (let index = 0; index < 15; index++) {
       const courier = makeCourier()
       couriersRepository.create(courier)
@@ -22,5 +22,11 @@ describe('Fetch Couriers [USE CASE]', () => {
 
     const { couriers: couriersSecondPage } = await sut.execute({ page: 2 })
     expect(couriersSecondPage).toHaveLength(5)
+  })
+
+  it('should return an empty list of couriers', async () => {
+    const { couriers } = await sut.execute({ page: 1 })
+
+    expect(couriers).toHaveLength(0)
   })
 })

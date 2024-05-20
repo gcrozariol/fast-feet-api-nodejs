@@ -18,7 +18,7 @@ export class DeleteOrderUseCase {
       throw new Error('Order not found')
     }
 
-    this.orderRepository.delete(order)
+    this.orderRepository.delete(order.id.toString())
 
     return {}
   }

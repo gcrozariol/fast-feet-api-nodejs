@@ -32,14 +32,29 @@ export class InMemoryOrdersRepository implements OrdersRepository {
     return orders
   }
 
+  async fetchOrdersByRecipient(
+    recipientId: string,
+    params: PaginationParams,
+  ): Promise<Order[]> {
+    const { page } = params
+
+    const orders = this.items
+      .filter((item) => item.recipientId.toString() === recipientId)
+      .slice((page - 1) * 10, page * 10)
+
+    return orders
+  }
+
   async save(order: Order): Promise<void> {
     const orderIndex = this.items.findIndex((item) => item.id === order.id)
 
     this.items[orderIndex] = order
   }
 
-  async delete(order: Order): Promise<void> {
-    const orderIndex = this.items.findIndex((item) => item.id === order.id)
+  async delete(orderId: string): Promise<void> {
+    const orderIndex = this.items.findIndex(
+      (item) => item.id.toString() === orderId,
+    )
 
     this.items.splice(orderIndex, 1)
   }

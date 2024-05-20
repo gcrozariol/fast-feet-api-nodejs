@@ -10,7 +10,9 @@ describe('Delete Courier [USE CASE]', () => {
     const courier = makeCourier()
 
     await inMemoryCouriersRepository.create(courier)
+    expect(inMemoryCouriersRepository.items).toHaveLength(1)
 
     await sut.execute({ courierId: courier.id.toString() })
+    expect(inMemoryCouriersRepository.items).toHaveLength(0)
   })
 })
