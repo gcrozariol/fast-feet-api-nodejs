@@ -25,6 +25,12 @@ export class InMemoryCouriersRepository implements CouriersRepository {
     return this.items.slice((page - 1) * 10, page * 10)
   }
 
+  async save(courier: Courier): Promise<void> {
+    const courierIndex = this.items.findIndex((item) => item.id === courier.id)
+
+    this.items[courierIndex] = courier
+  }
+
   async delete(id: string): Promise<void> {
     const index = this.items.findIndex((item) => item.id.toString() === id)
 

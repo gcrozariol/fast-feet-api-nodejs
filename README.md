@@ -8,7 +8,7 @@ An API developed using Node.js for controlling orders from a fictitious carrier:
 
 - [x] The application must have two types of user: delivery person and/or administrator
 - [ ] It must be possible to log in with CPF and Password
-- [ ] It must be possible to perform CRUD for couriers
+- [x] It must be possible to perform CRUD for couriers
 - [x] It must be possible to perform CRUD of orders
 - [ ] It must be possible to perform CRUD on recipients
 - [x] It must be possible to mark an order as waiting (Available for pickup)
