@@ -32,9 +32,9 @@ export class Order extends Entity<OrderProps> {
   ) {
     const order = new Order(
       {
-        ...props,
         status: Status.READY_FOR_PICKUP,
         createdAt: new Date(),
+        ...props,
       },
       id,
     )

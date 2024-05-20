@@ -1,6 +1,6 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { OrdersRepository } from '@/domain/carrier/application/repositories/orders-repository'
-import { Order } from '@/domain/carrier/enterprise/entities/order'
+import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
 
 export class InMemoryOrdersRepository implements OrdersRepository {
   public items: Order[] = []
@@ -40,6 +40,19 @@ export class InMemoryOrdersRepository implements OrdersRepository {
 
     const orders = this.items
       .filter((item) => item.recipientId.toString() === recipientId)
+      .slice((page - 1) * 10, page * 10)
+
+    return orders
+  }
+
+  async fetchOrdersByStatus(
+    status: Status,
+    params: PaginationParams,
+  ): Promise<Order[]> {
+    const { page } = params
+
+    const orders = this.items
+      .filter((item) => item.status === status)
       .slice((page - 1) * 10, page * 10)
 
     return orders
