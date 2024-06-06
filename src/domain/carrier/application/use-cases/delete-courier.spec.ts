@@ -1,3 +1,4 @@
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { DeleteCourierUseCase } from './delete-courier'
 import { makeCourier } from '@test/factories/make-courier'
 import { InMemoryCouriersRepository } from 'test/repositories/in-memory/in-memory-couriers-repository'
@@ -7,12 +8,12 @@ describe('Delete Courier [USE CASE]', () => {
     const inMemoryCouriersRepository = new InMemoryCouriersRepository()
     const sut = new DeleteCourierUseCase(inMemoryCouriersRepository)
 
-    const courier = makeCourier()
+    const courier = makeCourier({}, new UniqueEntityID('courier-1'))
 
     await inMemoryCouriersRepository.create(courier)
     expect(inMemoryCouriersRepository.items).toHaveLength(1)
 
-    await sut.execute({ courierId: courier.id.toString() })
+    await sut.execute({ courierId: 'courier-1' })
     expect(inMemoryCouriersRepository.items).toHaveLength(0)
   })
 })

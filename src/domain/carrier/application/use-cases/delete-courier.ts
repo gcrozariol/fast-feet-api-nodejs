@@ -18,7 +18,7 @@ export class DeleteCourierUseCase {
       throw new Error('Courier not found')
     }
 
-    this.couriersRepository.delete(courierId)
+    this.couriersRepository.delete(courier)
 
     return {}
   }

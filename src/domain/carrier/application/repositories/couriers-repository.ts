@@ -10,5 +10,5 @@ export interface CouriersRepository {
   findById(id: string): Promise<Courier | null>
   findMany(params: PaginationParams): Promise<Courier[]>
   save(courier: Courier): Promise<void>
-  delete(courierId: string): Promise<void>
+  delete(courier: Courier): Promise<void>
 }
