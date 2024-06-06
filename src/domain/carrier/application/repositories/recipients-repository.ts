@@ -10,5 +10,5 @@ export interface RecipientsRepository {
   findById(recipientId: string): Promise<Recipient | null>
   findMany(params: PaginationParams): Promise<Recipient[]>
   save(recipient: Recipient): Promise<void>
-  delete(recipientId: string): Promise<void>
+  delete(recipient: Recipient): Promise<void>
 }
