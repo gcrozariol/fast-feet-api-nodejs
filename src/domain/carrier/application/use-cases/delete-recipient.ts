@@ -18,7 +18,7 @@ export class DeleteRecipientUseCase {
       throw new Error('Recipient not found')
     }
 
-    this.recipientsRepository.delete(recipientId)
+    this.recipientsRepository.delete(recipient)
 
     return {}
   }
