@@ -15,7 +15,7 @@ An API developed using Node.js for controlling orders from a fictitious carrier:
 - [x] It must be possible to mark an order as waiting (available for pickup)
 - [x] It must be possible to mark an order as delivered
 - [x] It must be possible to mark an order as returned
-- [ ] It must be possible to list orders with delivery addresses close to the delivery person's location
+- [x] It must be possible to list orders with delivery addresses close to the delivery person's location
 - [ ] It must be possible to change a user's password
 - [x] It must be possible to list a recipient's deliveries
 - [ ] It must be possible to notify the recipient of each change in the order status
