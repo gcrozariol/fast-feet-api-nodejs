@@ -8,12 +8,9 @@ describe('Create Courier [USE CASE]', () => {
 
     const courierName = 'John Doe'
 
-    const { courier } = await sut.execute({
-      name: courierName,
-    })
+    const result = await sut.execute({ name: courierName })
 
-    const { name } = courier
-
-    expect(name).toEqual(courierName)
+    expect(result.isRight()).toEqual(true)
+    expect(result.value?.courier.name).toEqual(courierName)
   })
 })
