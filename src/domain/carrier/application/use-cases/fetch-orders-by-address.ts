@@ -1,3 +1,4 @@
+import { Either, right } from '@/core/either'
 import { Order } from '@/domain/carrier/enterprise/entities/order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 
@@ -6,10 +7,12 @@ interface FetchOrdersByAddressUseCaseRequest {
   page: number
 }
 
-interface FetchOrdersByAddressUseCaseResponse {
-  orders: Order[]
-}
-
+type FetchOrdersByAddressUseCaseResponse = Either<
+  null,
+  {
+    orders: Order[]
+  }
+>
 export class FetchOrdersByAddressUseCase {
   constructor(private readonly ordersRepository: InMemoryOrdersRepository) {}
 
@@ -21,6 +24,6 @@ export class FetchOrdersByAddressUseCase {
       page,
     })
 
-    return { orders }
+    return right({ orders })
   }
 }
