@@ -14,6 +14,7 @@ export enum Status {
 
 export interface OrderProps {
   recipientId: UniqueEntityID
+  courierId?: UniqueEntityID
   description: string
   address: string
   status: Status
@@ -44,6 +45,14 @@ export class Order extends Entity<OrderProps> {
 
   get recipientId() {
     return this.props.recipientId
+  }
+
+  get courierId() {
+    return this.props.courierId
+  }
+
+  set courierId(courierId: UniqueEntityID | undefined) {
+    this.props.courierId = courierId
   }
 
   get description() {

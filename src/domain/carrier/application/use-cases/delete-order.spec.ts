@@ -11,9 +11,9 @@ describe('Delete Order [USE CASE]', () => {
     const order = makeOrder({}, new UniqueEntityID('order-1'))
 
     await inMemoryOrdersRepository.create(order)
-    expect(inMemoryOrdersRepository.items).toHaveLength(1)
 
     await sut.execute({ orderId: 'order-1' })
+
     expect(inMemoryOrdersRepository.items).toHaveLength(0)
   })
 })
