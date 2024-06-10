@@ -1,13 +1,18 @@
 import { InMemoryCouriersRepository } from '@test/repositories/in-memory/in-memory-couriers-repository'
 import { Courier } from '../../enterprise/entities/courier'
+import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface GetCourierByIdUseCaseRequest {
   courierId: string
 }
 
-interface GetCourierByIdUseCaseResponse {
-  courier: Courier
-}
+type GetCourierByIdUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    courier: Courier
+  }
+>
 
 export class GetCourierByIdUseCase {
   constructor(
@@ -20,9 +25,9 @@ export class GetCourierByIdUseCase {
     const courier = await this.couriersRepository.findById(courierId)
 
     if (!courier) {
-      throw new Error('Courier not found')
+      return left(new ResourceNotFoundError())
     }
 
-    return { courier }
+    return right({ courier })
   }
 }
