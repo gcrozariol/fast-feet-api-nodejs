@@ -12,13 +12,14 @@ describe('Edit Order [USE CASE]', () => {
 
     await inMemoryOrdersRepository.create(order)
 
-    const { order: updatedOrder } = await sut.execute({
+    const result = await sut.execute({
       orderId: order.id.toString(),
       props: {
         status: Status.DELIVERED,
       },
     })
 
-    expect(updatedOrder.status).toEqual(Status.DELIVERED)
+    expect(result.isRight()).toEqual(true)
+    expect(inMemoryOrdersRepository.items[0].status).toEqual(Status.DELIVERED)
   })
 })
