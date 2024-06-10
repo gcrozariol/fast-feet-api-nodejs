@@ -1,22 +1,40 @@
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { UpdateOrderStatusUseCase } from './update-order-status'
 import { Status } from '@/domain/carrier/enterprise/entities/order'
 import { makeOrder } from '@test/factories/make-order'
 import { InMemoryOrdersRepository } from 'test/repositories/in-memory/in-memory-orders-repository'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
+
+let inMemoryOrdersRepository: InMemoryOrdersRepository
+let sut: UpdateOrderStatusUseCase
 
 describe('Update Order Status [USE CASE]', () => {
-  it('should be able to update an order status to DELIVERED', async () => {
-    const inMemoryOrdersRepository = new InMemoryOrdersRepository()
-    const sut = new UpdateOrderStatusUseCase(inMemoryOrdersRepository)
+  beforeEach(() => {
+    inMemoryOrdersRepository = new InMemoryOrdersRepository()
+    sut = new UpdateOrderStatusUseCase(inMemoryOrdersRepository)
+  })
 
-    const order = makeOrder()
+  it('should be able to update an order status to DELIVERED', async () => {
+    const order = makeOrder({}, new UniqueEntityID('order-1'))
 
     await inMemoryOrdersRepository.create(order)
 
-    const { order: updatedOrder } = await sut.execute({
-      orderId: order.id.toString(),
+    const result = await sut.execute({
+      orderId: 'order-1',
       status: Status.DELIVERED,
     })
 
-    expect(updatedOrder.status).toEqual(Status.DELIVERED)
+    expect(result.isRight()).toEqual(true)
+    expect(inMemoryOrdersRepository.items[0].status).toEqual(Status.DELIVERED)
+  })
+
+  it('should be able to update an inexistent order status to DELIVERED', async () => {
+    const result = await sut.execute({
+      orderId: 'inexistent-order-1',
+      status: Status.DELIVERED,
+    })
+
+    expect(result.isLeft()).toEqual(true)
+    expect(result.value).toBeInstanceOf(ResourceNotFoundError)
   })
 })

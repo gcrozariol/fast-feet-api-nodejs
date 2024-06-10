@@ -1,14 +1,19 @@
+import { Either, left, right } from '@/core/either'
 import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface UpdateOrderStatusUseCaseRequest {
   orderId: string
   status: Status
 }
 
-interface UpdateOrderStatusUseCaseResponse {
-  order: Order
-}
+type UpdateOrderStatusUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    order: Order
+  }
+>
 
 export class UpdateOrderStatusUseCase {
   constructor(private orderRepository: InMemoryOrdersRepository) {}
@@ -20,13 +25,13 @@ export class UpdateOrderStatusUseCase {
     const order = await this.orderRepository.findById(orderId)
 
     if (!order) {
-      throw new Error('Order not found')
+      return left(new ResourceNotFoundError())
     }
 
     order.status = status
 
     await this.orderRepository.save(order)
 
-    return { order }
+    return right({ order })
   }
 }
