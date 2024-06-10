@@ -21,26 +21,30 @@ describe('Fetch Orders by Recipient [USE CASE]', () => {
       ordersRepository.create(order)
     }
 
-    const { orders: firstOrdersPage } = await sut.execute({
+    const resultFirstPage = await sut.execute({
       recipientId: '1',
       page: 1,
     })
 
-    const { orders: secondOrdersPage } = await sut.execute({
+    expect(resultFirstPage.isRight()).toEqual(true)
+    expect(resultFirstPage.value?.orders).toHaveLength(10)
+
+    const resultSecondPage = await sut.execute({
       recipientId: '1',
       page: 2,
     })
 
-    expect(firstOrdersPage).toHaveLength(10)
-    expect(secondOrdersPage).toHaveLength(2)
+    expect(resultSecondPage.isRight()).toEqual(true)
+    expect(resultSecondPage.value?.orders).toHaveLength(2)
   })
 
   it('should fetch an empty list if orders cannot be found with provided recipient id', async () => {
-    const { orders } = await sut.execute({
+    const result = await sut.execute({
       recipientId: 'inexistent_recipient_id',
       page: 1,
     })
 
-    expect(orders).toHaveLength(0)
+    expect(result.isRight()).toEqual(true)
+    expect(result.value?.orders).toHaveLength(0)
   })
 })
