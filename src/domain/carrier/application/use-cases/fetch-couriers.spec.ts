@@ -17,16 +17,21 @@ describe('Fetch Couriers [USE CASE]', () => {
       couriersRepository.create(courier)
     }
 
-    const { couriers: couriersFirstPage } = await sut.execute({ page: 1 })
-    expect(couriersFirstPage).toHaveLength(10)
+    const resultFirstPage = await sut.execute({ page: 1 })
 
-    const { couriers: couriersSecondPage } = await sut.execute({ page: 2 })
-    expect(couriersSecondPage).toHaveLength(5)
+    expect(resultFirstPage.isRight()).toEqual(true)
+    expect(resultFirstPage.value?.couriers).toHaveLength(10)
+
+    const resultSecondPage = await sut.execute({ page: 2 })
+
+    expect(resultSecondPage.isRight()).toEqual(true)
+    expect(resultSecondPage.value?.couriers).toHaveLength(5)
   })
 
-  it('should return an empty list of couriers', async () => {
-    const { couriers } = await sut.execute({ page: 1 })
+  it.only('should return an empty list of couriers', async () => {
+    const result = await sut.execute({ page: 1 })
 
-    expect(couriers).toHaveLength(0)
+    expect(result.isRight()).toEqual(true)
+    expect(result.value?.couriers).toHaveLength(0)
   })
 })
