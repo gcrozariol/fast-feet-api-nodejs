@@ -2,15 +2,20 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { CouriersRepository } from '../repositories/couriers-repository'
 import { OrdersRepository } from '../repositories/orders-repository'
 import { Order } from '../../enterprise/entities/order'
+import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface UpdateOrderCourierUseCaseRequest {
   orderId: string
   courierId: string
 }
 
-interface UpdateOrderCourierUseCaseResponse {
-  order: Order
-}
+type UpdateOrderCourierUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    order: Order
+  }
+>
 
 export class UpdateOrderCourierUseCase {
   constructor(
@@ -25,21 +30,19 @@ export class UpdateOrderCourierUseCase {
     const order = await this.ordersRepository.findById(orderId)
 
     if (!order) {
-      throw new Error('Order not found.')
+      return left(new ResourceNotFoundError())
     }
 
     const courier = await this.couriersReository.findById(courierId)
 
     if (!courier) {
-      throw new Error('Courier not found.')
+      return left(new ResourceNotFoundError())
     }
 
     order.courierId = new UniqueEntityID(courierId)
 
     await this.ordersRepository.save(order)
 
-    return {
-      order,
-    }
+    return right({ order })
   }
 }
