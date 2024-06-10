@@ -1,4 +1,4 @@
-export class Left<L, R> {
+class Left<L, R> {
   constructor(readonly value: L) {}
 
   isLeft(): this is Left<L, R> {
@@ -10,7 +10,7 @@ export class Left<L, R> {
   }
 }
 
-export class Right<L, R> {
+class Right<L, R> {
   constructor(readonly value: R) {}
 
   isLeft(): this is Left<L, R> {
