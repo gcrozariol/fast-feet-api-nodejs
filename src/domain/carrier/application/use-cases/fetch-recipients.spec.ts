@@ -17,16 +17,21 @@ describe('Fetch Recipients [USE CASE]', () => {
       recipientsRepository.create(recipient)
     }
 
-    const { recipients: recipientsFirstPage } = await sut.execute({ page: 1 })
-    expect(recipientsFirstPage).toHaveLength(10)
+    const resultFirstPage = await sut.execute({ page: 1 })
 
-    const { recipients: recipientsSecondPage } = await sut.execute({ page: 2 })
-    expect(recipientsSecondPage).toHaveLength(5)
+    expect(resultFirstPage.isRight()).toEqual(true)
+    expect(resultFirstPage.value?.recipients).toHaveLength(10)
+
+    const resultSecondPage = await sut.execute({ page: 2 })
+
+    expect(resultSecondPage.isRight()).toEqual(true)
+    expect(resultSecondPage.value?.recipients).toHaveLength(5)
   })
 
   it('should return an empty list of recipients', async () => {
-    const { recipients } = await sut.execute({ page: 1 })
+    const result = await sut.execute({ page: 1 })
 
-    expect(recipients).toHaveLength(0)
+    expect(result.isRight()).toEqual(true)
+    expect(result.value?.recipients).toHaveLength(0)
   })
 })
