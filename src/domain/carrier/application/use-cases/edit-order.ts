@@ -1,15 +1,20 @@
 import { Order } from '@/domain/carrier/enterprise/entities/order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 import { EditOrderProps } from '../repositories/orders-repository'
+import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface EditOrderUseCaseRequest {
   orderId: string
   props: EditOrderProps
 }
 
-interface EditOrderUseCaseResponse {
-  order: Order
-}
+type EditOrderUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    order: Order
+  }
+>
 
 export class EditOrderUseCase {
   constructor(private orderRepository: InMemoryOrdersRepository) {}
@@ -21,13 +26,13 @@ export class EditOrderUseCase {
     const order = await this.orderRepository.findById(orderId)
 
     if (!order) {
-      throw new Error('Order not found')
+      return left(new ResourceNotFoundError())
     }
 
     Object.assign(order, props)
 
     await this.orderRepository.save(order)
 
-    return { order }
+    return right({ order })
   }
 }

@@ -6,15 +6,15 @@ describe('Create Recipient [USE CASE]', () => {
     const recipientsRepository = new InMemoryRecipientsRepository()
     const sut = new CreateRecipientUseCase(recipientsRepository)
 
-    const { recipient } = await sut.execute({
+    const result = await sut.execute({
       name: 'John Doe',
       address: 'address',
     })
 
-    const { id, name, address } = recipient
+    expect(result.isRight()).toEqual(true)
 
-    expect(id).toBeTruthy()
-    expect(name).toEqual('John Doe')
-    expect(address).toEqual('address')
+    expect(result.value?.recipient.id).toBeTruthy()
+    expect(result.value?.recipient.name).toEqual('John Doe')
+    expect(result.value?.recipient.address).toEqual('address')
   })
 })

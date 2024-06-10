@@ -1,10 +1,12 @@
+import { Either, left, right } from '@/core/either'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface DeleteOrderUseCaseRequest {
   orderId: string
 }
 
-interface DeleteOrderUseCaseResponse {}
+type DeleteOrderUseCaseResponse = Either<ResourceNotFoundError, {}>
 
 export class DeleteOrderUseCase {
   constructor(private orderRepository: InMemoryOrdersRepository) {}
@@ -15,11 +17,11 @@ export class DeleteOrderUseCase {
     const order = await this.orderRepository.findById(orderId)
 
     if (!order) {
-      throw new Error('Order not found')
+      return left(new ResourceNotFoundError())
     }
 
     this.orderRepository.delete(order)
 
-    return {}
+    return right({})
   }
 }

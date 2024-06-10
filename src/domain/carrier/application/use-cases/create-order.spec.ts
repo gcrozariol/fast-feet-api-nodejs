@@ -6,17 +6,17 @@ describe('Create Order [USE CASE]', () => {
     const ordersRepository = new InMemoryOrdersRepository()
     const sut = new CreateOrderUseCase(ordersRepository)
 
-    const { order } = await sut.execute({
+    const result = await sut.execute({
       recipientId: '1',
       description: 'description',
       address: 'address',
     })
 
-    const { recipientId, description, address, isNew } = order
+    expect(result.isRight()).toEqual(true)
 
-    expect(recipientId.toString()).toEqual('1')
-    expect(description).toEqual('description')
-    expect(address).toEqual('address')
-    expect(isNew).toEqual(true)
+    expect(result.value?.order.recipientId.toString()).toEqual('1')
+    expect(result.value?.order.description).toEqual('description')
+    expect(result.value?.order.address).toEqual('address')
+    expect(result.value?.order.isNew).toEqual(true)
   })
 })

@@ -1,3 +1,4 @@
+import { Either, right } from '@/core/either'
 import { Recipient } from '../../enterprise/entities/recipient'
 import { RecipientsRepository } from '../repositories/recipients-repository'
 
@@ -6,9 +7,12 @@ interface CreateRecipientUseCaseRequest {
   address: string
 }
 
-interface CreateRecipientUseCaseResponse {
-  recipient: Recipient
-}
+type CreateRecipientUseCaseResponse = Either<
+  null,
+  {
+    recipient: Recipient
+  }
+>
 
 export class CreateRecipientUseCase {
   constructor(private readonly recipientsRepository: RecipientsRepository) {}
@@ -21,8 +25,8 @@ export class CreateRecipientUseCase {
 
     this.recipientsRepository.create(recipient)
 
-    return {
+    return right({
       recipient,
-    }
+    })
   }
 }

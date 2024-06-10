@@ -1,13 +1,18 @@
+import { Either, left, right } from '@/core/either'
 import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface PickupOrderUseCaseRequest {
   orderId: string
 }
 
-interface PickupOrderUseCaseResponse {
-  order: Order
-}
+type PickupOrderUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    order: Order
+  }
+>
 
 export class PickupOrderUseCase {
   constructor(private orderRepository: InMemoryOrdersRepository) {}
@@ -18,13 +23,13 @@ export class PickupOrderUseCase {
     const order = await this.orderRepository.findById(orderId)
 
     if (!order) {
-      throw new Error('Order not found')
+      return left(new ResourceNotFoundError())
     }
 
     order.status = Status.EN_ROUTE
 
     await this.orderRepository.save(order)
 
-    return { order }
+    return right({ order })
   }
 }
