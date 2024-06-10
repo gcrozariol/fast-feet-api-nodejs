@@ -1,6 +1,7 @@
 import { Order } from '@/domain/carrier/enterprise/entities/order'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
+import { Either, right } from '@/core/either'
 
 interface CreateOrderUseCaseRequest {
   recipientId: string
@@ -8,9 +9,12 @@ interface CreateOrderUseCaseRequest {
   address: string
 }
 
-interface CreateOrderUseCaseResponse {
-  order: Order
-}
+type CreateOrderUseCaseResponse = Either<
+  null,
+  {
+    order: Order
+  }
+>
 
 export class CreateOrderUseCase {
   constructor(private readonly ordersRepository: InMemoryOrdersRepository) {}
@@ -28,6 +32,6 @@ export class CreateOrderUseCase {
 
     await this.ordersRepository.create(order)
 
-    return { order }
+    return right({ order })
   }
 }

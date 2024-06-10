@@ -6,7 +6,12 @@ interface CreateCourierUseCaseRequest {
   name: string
 }
 
-type CreateCourierUseCaseResponse = Either<null, { courier: Courier }>
+type CreateCourierUseCaseResponse = Either<
+  null,
+  {
+    courier: Courier
+  }
+>
 
 export class CreateCourierUseCase {
   constructor(private readonly couriersRepository: CouriersRepository) {}
