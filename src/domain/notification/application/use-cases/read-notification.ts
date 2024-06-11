@@ -1,6 +1,6 @@
 import { Either, left, right } from '@/core/either'
-import { NotificationsRepository } from '../repositories/notifications-repository'
 import { ResourceNotFoundError } from '@/domain/carrier/application/use-cases/errors/resource-not-found-error'
+import { NotificationsRepository } from '../repositories/notifications-repository'
 
 interface ReadNotificationUseCaseRequest {
   notificationId: string

@@ -1,7 +1,7 @@
+import { Either, left, right } from '@/core/either'
 import { Order } from '@/domain/carrier/enterprise/entities/order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 import { EditOrderProps } from '../repositories/orders-repository'
-import { Either, left, right } from '@/core/either'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface EditOrderUseCaseRequest {
