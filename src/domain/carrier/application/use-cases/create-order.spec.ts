@@ -1,5 +1,5 @@
-import { CreateOrderUseCase } from './create-order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
+import { CreateOrderUseCase } from './create-order'
 
 describe('Create Order [USE CASE]', () => {
   it('should be able to create an order', async () => {

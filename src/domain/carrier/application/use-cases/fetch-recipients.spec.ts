@@ -1,4 +1,4 @@
-import { makeRecipient } from 'test/factories/make-recipient'
+import { makeRecipient } from '@test/factories/make-recipient'
 import { InMemoryRecipientsRepository } from '@test/repositories/in-memory/in-memory-recipients-repository'
 import { FetchRecipientsUseCase } from './fetch-recipients'
 

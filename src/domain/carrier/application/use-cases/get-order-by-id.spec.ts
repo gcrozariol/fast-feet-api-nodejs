@@ -1,9 +1,9 @@
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { makeOrder } from '@test/factories/make-order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
-import { GetOrderByIdUseCase } from './get-order-by-id'
 import { Status } from '../../enterprise/entities/order'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { GetOrderByIdUseCase } from './get-order-by-id'
 
 let ordersRepository: InMemoryOrdersRepository
 let sut: GetOrderByIdUseCase

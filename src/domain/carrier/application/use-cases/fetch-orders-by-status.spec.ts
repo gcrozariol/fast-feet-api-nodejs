@@ -1,7 +1,7 @@
-import { makeOrder } from 'test/factories/make-order'
+import { makeOrder } from '@test/factories/make-order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
-import { FetchOrdersByStatusUseCase } from './fetch-orders-by-status'
 import { Status } from '../../enterprise/entities/order'
+import { FetchOrdersByStatusUseCase } from './fetch-orders-by-status'
 
 let ordersRepository: InMemoryOrdersRepository
 let sut: FetchOrdersByStatusUseCase

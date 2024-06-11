@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { DeleteOrderUseCase } from './delete-order'
 import { makeOrder } from '@test/factories/make-order'
-import { InMemoryOrdersRepository } from 'test/repositories/in-memory/in-memory-orders-repository'
+import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
+import { DeleteOrderUseCase } from './delete-order'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository

@@ -1,7 +1,7 @@
-import { makeOrder } from 'test/factories/make-order'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { makeOrder } from '@test/factories/make-order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 import { FetchOrdersByRecipientUseCase } from './fetch-orders-by-recipient'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 let ordersRepository: InMemoryOrdersRepository
 let sut: FetchOrdersByRecipientUseCase

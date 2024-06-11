@@ -1,8 +1,8 @@
-import { PickupOrderUseCase } from './pick-up-order'
 import { Status } from '@/domain/carrier/enterprise/entities/order'
 import { makeOrder } from '@test/factories/make-order'
-import { InMemoryOrdersRepository } from 'test/repositories/in-memory/in-memory-orders-repository'
+import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { PickupOrderUseCase } from './pick-up-order'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository
 let sut: PickupOrderUseCase

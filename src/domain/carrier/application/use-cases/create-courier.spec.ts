@@ -1,5 +1,5 @@
-import { CreateCourierUseCase } from './create-courier'
 import { InMemoryCouriersRepository } from '@test/repositories/in-memory/in-memory-couriers-repository'
+import { CreateCourierUseCase } from './create-courier'
 
 describe('Create Courier [USE CASE]', () => {
   it('should be able to create an courier', async () => {
