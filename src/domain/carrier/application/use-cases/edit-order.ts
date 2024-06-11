@@ -1,8 +1,8 @@
 import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 import { EditOrderProps } from '../repositories/orders-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface EditOrderUseCaseRequest {
   orderId: string

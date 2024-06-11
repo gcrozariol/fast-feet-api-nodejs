@@ -12,6 +12,7 @@ export function makeCourier(
   const courier = Courier.create(
     {
       name: faker.person.firstName(),
+      email: faker.internet.email(),
       ...override,
     },
     id,

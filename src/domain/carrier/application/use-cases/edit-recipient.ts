@@ -1,8 +1,8 @@
 import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { Recipient } from '@/domain/carrier/enterprise/entities/recipient'
 import { InMemoryRecipientsRepository } from '@test/repositories/in-memory/in-memory-recipients-repository'
 import { EditRecipientProps } from '../repositories/recipients-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface EditRecipientUseCaseRequest {
   recipientId: string

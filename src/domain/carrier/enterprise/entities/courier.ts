@@ -4,7 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 export interface CourierProps {
   name: string
   email: string
-  admin: boolean
+  admin?: boolean
 }
 
 export class Courier extends Entity<CourierProps> {

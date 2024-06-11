@@ -1,7 +1,7 @@
 import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { InMemoryCouriersRepository } from '@test/repositories/in-memory/in-memory-couriers-repository'
 import { Courier } from '../../enterprise/entities/courier'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface GetCourierByIdUseCaseRequest {
   courierId: string

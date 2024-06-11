@@ -1,8 +1,8 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { makeCourier } from '@test/factories/make-courier'
 import { InMemoryCouriersRepository } from '@test/repositories/in-memory/in-memory-couriers-repository'
 import { DeleteCourierUseCase } from './delete-courier'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 describe('Delete Courier [USE CASE]', () => {
   it('should be able to delete an courier', async () => {
