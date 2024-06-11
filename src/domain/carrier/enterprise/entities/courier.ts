@@ -3,6 +3,8 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 export interface CourierProps {
   name: string
+  email: string
+  admin: boolean
 }
 
 export class Courier extends Entity<CourierProps> {
@@ -18,5 +20,13 @@ export class Courier extends Entity<CourierProps> {
 
   set name(name: string) {
     this.props.name = name
+  }
+
+  get email() {
+    return this.props.email
+  }
+
+  get admin() {
+    return this.props.admin
   }
 }

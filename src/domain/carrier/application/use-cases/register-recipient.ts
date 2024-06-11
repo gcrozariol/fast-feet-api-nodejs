@@ -2,25 +2,25 @@ import { Either, right } from '@/core/either'
 import { Recipient } from '../../enterprise/entities/recipient'
 import { RecipientsRepository } from '../repositories/recipients-repository'
 
-interface CreateRecipientUseCaseRequest {
+interface RegisterRecipientUseCaseRequest {
   name: string
   address: string
 }
 
-type CreateRecipientUseCaseResponse = Either<
+type RegisterRecipientUseCaseResponse = Either<
   null,
   {
     recipient: Recipient
   }
 >
 
-export class CreateRecipientUseCase {
+export class RegisterRecipientUseCase {
   constructor(private readonly recipientsRepository: RecipientsRepository) {}
 
   async execute({
     name,
     address,
-  }: CreateRecipientUseCaseRequest): Promise<CreateRecipientUseCaseResponse> {
+  }: RegisterRecipientUseCaseRequest): Promise<RegisterRecipientUseCaseResponse> {
     const recipient = Recipient.create({ name, address })
 
     this.recipientsRepository.create(recipient)
