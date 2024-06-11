@@ -3,8 +3,8 @@ import { makeCourier } from '@test/factories/make-courier'
 import { makeOrder } from '@test/factories/make-order'
 import { InMemoryCouriersRepository } from '@test/repositories/in-memory/in-memory-couriers-repository'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
-import { UpdateOrderCourierUseCase } from './update-order-courier'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { UpdateOrderCourierUseCase } from './update-order-courier'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository
 let inMemoryCouriersRepository: InMemoryCouriersRepository

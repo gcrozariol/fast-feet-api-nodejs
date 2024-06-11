@@ -1,4 +1,4 @@
-import { makeCourier } from 'test/factories/make-courier'
+import { makeCourier } from '@test/factories/make-courier'
 import { InMemoryCouriersRepository } from '@test/repositories/in-memory/in-memory-couriers-repository'
 import { FetchCouriersUseCase } from './fetch-couriers'
 
@@ -28,7 +28,7 @@ describe('Fetch Couriers [USE CASE]', () => {
     expect(resultSecondPage.value?.couriers).toHaveLength(5)
   })
 
-  it.only('should return an empty list of couriers', async () => {
+  it('should return an empty list of couriers', async () => {
     const result = await sut.execute({ page: 1 })
 
     expect(result.isRight()).toEqual(true)

@@ -1,4 +1,4 @@
-import { makeOrder } from 'test/factories/make-order'
+import { makeOrder } from '@test/factories/make-order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 import { FetchOrdersByAddressUseCase } from './fetch-orders-by-address'
 

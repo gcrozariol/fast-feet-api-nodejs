@@ -1,5 +1,5 @@
-import { CreateRecipientUseCase } from './create-recipient'
 import { InMemoryRecipientsRepository } from '@test/repositories/in-memory/in-memory-recipients-repository'
+import { CreateRecipientUseCase } from './create-recipient'
 
 describe('Create Recipient [USE CASE]', () => {
   it('should be able to create an recipient', async () => {

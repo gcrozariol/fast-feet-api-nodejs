@@ -1,8 +1,8 @@
-import { EditRecipientUseCase } from './edit-recipient'
-import { makeRecipient } from '@test/factories/make-recipient'
-import { InMemoryRecipientsRepository } from 'test/repositories/in-memory/in-memory-recipients-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { makeRecipient } from '@test/factories/make-recipient'
+import { InMemoryRecipientsRepository } from '@test/repositories/in-memory/in-memory-recipients-repository'
+import { EditRecipientUseCase } from './edit-recipient'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 describe('Edit Recipient [USE CASE]', () => {
   it('should be able to update a recipient name', async () => {

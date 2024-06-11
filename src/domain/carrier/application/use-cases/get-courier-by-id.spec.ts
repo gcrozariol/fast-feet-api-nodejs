@@ -1,7 +1,7 @@
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { makeCourier } from '@test/factories/make-courier'
 import { InMemoryCouriersRepository } from '@test/repositories/in-memory/in-memory-couriers-repository'
 import { GetCourierByIdUseCase } from './get-courier-by-id'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 let couriersRepository: InMemoryCouriersRepository
 let sut: GetCourierByIdUseCase

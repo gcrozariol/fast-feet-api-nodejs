@@ -1,7 +1,7 @@
-import { EditOrderUseCase } from './edit-order'
 import { Status } from '@/domain/carrier/enterprise/entities/order'
 import { makeOrder } from '@test/factories/make-order'
-import { InMemoryOrdersRepository } from 'test/repositories/in-memory/in-memory-orders-repository'
+import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
+import { EditOrderUseCase } from './edit-order'
 
 describe('Edit Order [USE CASE]', () => {
   it('should be able to update an order status', async () => {
