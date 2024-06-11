@@ -6,11 +6,9 @@ describe('Create Courier [USE CASE]', () => {
     const couriersRepository = new InMemoryCouriersRepository()
     const sut = new CreateCourierUseCase(couriersRepository)
 
-    const courierName = 'John Doe'
-
-    const result = await sut.execute({ name: courierName })
+    const result = await sut.execute({ name: 'John Doe' })
 
     expect(result.isRight()).toEqual(true)
-    expect(result.value?.courier.name).toEqual(courierName)
+    expect(result.value?.courier.name).toEqual('John Doe')
   })
 })
