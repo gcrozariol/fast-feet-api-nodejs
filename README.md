@@ -26,7 +26,7 @@ An API developed using Node.js for controlling orders from a fictitious carrier:
 - [ ] Only admin type users can perform CRUD operations for couriers
 - [ ] Only admin type users can perform CRUD operations on recipients
 - [ ] To mark an order as delivered, it is mandatory to send a photo
-- [ ] Only the courier who picked up the order can mark it as delivered
+- [x] Only the courier who picked up the order can mark it as delivered
 - [ ] Only the administrator can change a user's password
 - [ ] It must not be possible for a courier to list the orders of another courier
 - [x] It must not be possible to register a courier with existing email
