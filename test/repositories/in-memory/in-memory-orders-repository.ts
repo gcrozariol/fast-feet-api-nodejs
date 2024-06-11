@@ -21,10 +21,8 @@ export class InMemoryOrdersRepository implements OrdersRepository {
 
   async fetchOrdersByAddress(
     address: string,
-    params: PaginationParams,
+    { page = 1 }: PaginationParams,
   ): Promise<Order[]> {
-    const { page } = params
-
     const orders = this.items
       .filter((item) => item.address.includes(address))
       .slice((page - 1) * 10, page * 10)
@@ -34,10 +32,8 @@ export class InMemoryOrdersRepository implements OrdersRepository {
 
   async fetchOrdersByRecipient(
     recipientId: string,
-    params: PaginationParams,
+    { page = 1 }: PaginationParams,
   ): Promise<Order[]> {
-    const { page } = params
-
     const orders = this.items
       .filter((item) => item.recipientId.toString() === recipientId)
       .slice((page - 1) * 10, page * 10)
@@ -47,10 +43,8 @@ export class InMemoryOrdersRepository implements OrdersRepository {
 
   async fetchOrdersByStatus(
     status: Status,
-    params: PaginationParams,
+    { page = 1 }: PaginationParams,
   ): Promise<Order[]> {
-    const { page } = params
-
     const orders = this.items
       .filter((item) => item.status === status)
       .slice((page - 1) * 10, page * 10)

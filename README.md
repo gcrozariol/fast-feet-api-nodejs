@@ -29,4 +29,4 @@ An API developed using Node.js for controlling orders from a fictitious carrier:
 - [ ] Only the courier who picked up the order can mark it as delivered
 - [ ] Only the administrator can change a user's password
 - [ ] It must not be possible for a courier to list the orders of another courier
-- [ ] It must not be possible to register a courier with existing email
+- [x] It must not be possible to register a courier with existing email

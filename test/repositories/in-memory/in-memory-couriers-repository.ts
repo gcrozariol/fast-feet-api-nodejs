@@ -29,9 +29,7 @@ export class InMemoryCouriersRepository implements CouriersRepository {
     return courier
   }
 
-  async findMany(params: PaginationParams): Promise<Courier[]> {
-    const { page } = params
-
+  async findMany({ page = 1 }: PaginationParams): Promise<Courier[]> {
     return this.items.slice((page - 1) * 10, page * 10)
   }
 
