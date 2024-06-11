@@ -8,8 +8,6 @@ export enum Status {
   'READY_FOR_PICKUP' = 'READY_FOR_PICKUP',
   'EN_ROUTE' = 'EN_ROUTE',
   'DELIVERED' = 'DELIVERED',
-  'RETURNED' = 'RETURNED',
-  'CANCELED' = 'CANCELED',
 }
 
 export interface OrderProps {
@@ -78,12 +76,6 @@ export class Order extends Entity<OrderProps> {
         break
       case Status.DELIVERED:
         this.props.deliveredAt = new Date()
-        break
-      case Status.RETURNED:
-        this.props.returnedAt = new Date()
-        break
-      case Status.CANCELED:
-        this.props.canceledAt = new Date()
         break
       default:
         break

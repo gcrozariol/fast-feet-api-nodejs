@@ -1,11 +1,12 @@
 import { Either, left, right } from '@/core/either'
-import { Order } from '@/domain/carrier/enterprise/entities/order'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
+import { Order, Status } from '@/domain/carrier/enterprise/entities/order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
 import { EditOrderProps } from '../repositories/orders-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface EditOrderUseCaseRequest {
   orderId: string
+  courierId: string
   props: EditOrderProps
 }
 
@@ -21,6 +22,7 @@ export class EditOrderUseCase {
 
   async execute({
     orderId,
+    courierId,
     props,
   }: EditOrderUseCaseRequest): Promise<EditOrderUseCaseResponse> {
     const order = await this.orderRepository.findById(orderId)
@@ -29,7 +31,18 @@ export class EditOrderUseCase {
       return left(new ResourceNotFoundError())
     }
 
-    Object.assign(order, props)
+    const { status, ...otherProps } = props
+
+    if (
+      order.courierId &&
+      order.courierId.toString() === courierId &&
+      status === Status.DELIVERED &&
+      order.status !== status
+    ) {
+      order.status = status
+    }
+
+    Object.assign(order, otherProps)
 
     await this.orderRepository.save(order)
 

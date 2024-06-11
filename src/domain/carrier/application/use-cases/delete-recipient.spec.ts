@@ -1,8 +1,8 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { makeRecipient } from '@test/factories/make-recipient'
 import { InMemoryRecipientsRepository } from '@test/repositories/in-memory/in-memory-recipients-repository'
 import { DeleteRecipientUseCase } from './delete-recipient'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let inMemoryRecipientsRepository: InMemoryRecipientsRepository
 let sut: DeleteRecipientUseCase

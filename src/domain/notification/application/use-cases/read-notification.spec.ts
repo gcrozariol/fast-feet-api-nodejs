@@ -1,5 +1,5 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { ResourceNotFoundError } from '@/domain/carrier/application/use-cases/errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { makeNotification } from '@test/factories/make-notification'
 import { InMemoryNotificationsRepository } from '@test/repositories/in-memory/in-memory-notifications-repository'
 import { ReadNotificationUseCase } from './read-notification'

@@ -1,8 +1,8 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { Status } from '@/domain/carrier/enterprise/entities/order'
 import { makeOrder } from '@test/factories/make-order'
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { UpdateOrderStatusUseCase } from './update-order-status'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository

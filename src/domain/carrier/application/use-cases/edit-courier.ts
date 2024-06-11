@@ -1,8 +1,8 @@
 import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { Courier } from '@/domain/carrier/enterprise/entities/courier'
 import { InMemoryCouriersRepository } from '@test/repositories/in-memory/in-memory-couriers-repository'
 import { EditCourierProps } from '../repositories/couriers-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface EditCourierUseCaseRequest {
   courierId: string

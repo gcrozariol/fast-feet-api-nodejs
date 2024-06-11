@@ -1,6 +1,6 @@
 import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { RecipientsRepository } from '../repositories/recipients-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface DeleteRecipientUseCaseRequest {
   recipientId: string

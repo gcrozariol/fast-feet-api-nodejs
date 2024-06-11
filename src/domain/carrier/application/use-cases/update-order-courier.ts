@@ -1,9 +1,9 @@
 import { Either, left, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { Order } from '../../enterprise/entities/order'
 import { CouriersRepository } from '../repositories/couriers-repository'
 import { OrdersRepository } from '../repositories/orders-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface UpdateOrderCourierUseCaseRequest {
   orderId: string

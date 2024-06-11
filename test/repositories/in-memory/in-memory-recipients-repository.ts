@@ -21,9 +21,7 @@ export class InMemoryRecipientsRepository implements RecipientsRepository {
     return recipient
   }
 
-  async findMany(params: PaginationParams): Promise<Recipient[]> {
-    const { page } = params
-
+  async findMany({ page = 1 }: PaginationParams): Promise<Recipient[]> {
     return this.items.slice((page - 1) * 10, page * 10)
   }
 

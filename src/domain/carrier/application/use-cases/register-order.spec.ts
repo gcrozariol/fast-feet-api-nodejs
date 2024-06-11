@@ -1,10 +1,10 @@
 import { InMemoryOrdersRepository } from '@test/repositories/in-memory/in-memory-orders-repository'
-import { CreateOrderUseCase } from './create-order'
+import { RegisterOrderUseCase } from './register-order'
 
 describe('Create Order [USE CASE]', () => {
   it('should be able to create an order', async () => {
     const ordersRepository = new InMemoryOrdersRepository()
-    const sut = new CreateOrderUseCase(ordersRepository)
+    const sut = new RegisterOrderUseCase(ordersRepository)
 
     const result = await sut.execute({
       recipientId: '1',
